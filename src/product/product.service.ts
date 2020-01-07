@@ -10,7 +10,8 @@ export class ProductService {
         { id: 2, name: 'I Phone X', price: 64999 }
     ];
 
-    constructor(@Inject(PRODUCT) product: Product, @Inject('ClientConnection') dbProviderService: DbproviderService) {
+    constructor(@Inject(PRODUCT) product: Product,
+        @Inject('ClientConnection') dbProviderService: DbproviderService) {
         console.log(product.endPoint);
         console.log(dbProviderService.getProductsForClient())
     }
