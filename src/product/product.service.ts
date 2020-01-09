@@ -1,6 +1,8 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { PRODUCT, Product } from './product.token';
 import { DbproviderService } from 'src/dbprovider/dbprovider.service';
+import { TransientdemoService } from 'src/transientdemo/transientdemo.service';
+import { RequestdemoService } from 'src/requestdemo/requestdemo.service';
 
 @Injectable()
 export class ProductService {
@@ -11,6 +13,8 @@ export class ProductService {
     ];
 
     constructor(@Inject(PRODUCT) product: Product,
+        private transientService: TransientdemoService,
+        private requestService: RequestdemoService,
         @Inject('ClientConnection') dbProviderService: DbproviderService) {
         console.log(product.endPoint);
         console.log(dbProviderService.getProductsForClient())

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, Scope } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ShoppingLibModule } from '@app/shopping-lib'
@@ -7,6 +7,8 @@ import { ProductService } from './product/product.service';
 import { PRODUCT, Product_Token } from './product/product.token';
 import { ClientService } from './client/client.service';
 import { dbConnectionFactory } from './connection.provider';
+import { TransientdemoService } from './transientdemo/transientdemo.service';
+import { RequestdemoService } from './requestdemo/requestdemo.service';
 
 @Module({
   imports: [ShoppingLibModule],
@@ -14,8 +16,11 @@ import { dbConnectionFactory } from './connection.provider';
   providers: [AppService, ProductService, dbConnectionFactory,
    {
      provide : PRODUCT,
-     useValue: Product_Token
+     useValue: Product_Token,
+     scope : Scope.REQUEST
    },
-   ClientService],
+   ClientService,
+   TransientdemoService,
+   RequestdemoService],
 })
 export class AppModule { }

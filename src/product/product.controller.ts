@@ -1,11 +1,16 @@
-import { Controller, Get, Post, Req, Put, Delete, Patch, Res, HttpCode, Header, Param } from '@nestjs/common';
+import { Controller, Get, Post, Req, Put, Delete, Patch, Res, HttpCode, Header, Param, Scope } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ProductService } from './product.service';
+import { TransientdemoService } from '../transientdemo/transientdemo.service';
+import { RequestdemoService } from '../requestdemo/requestdemo.service';
 
-@Controller('product')
+@Controller({ path: 'product', scope: Scope.REQUEST })
 export class ProductController {
 
-    constructor(private productService: ProductService) {}
+    constructor(private productService: ProductService,
+        private transientService: TransientdemoService,
+        private requestService: RequestdemoService) { }
+
 
     @Get()
     GetProducts() {
